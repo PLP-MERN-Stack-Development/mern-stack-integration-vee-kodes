@@ -16,12 +16,12 @@ const PostSchema = new mongoose.Schema(
     },
     featuredImage: {
       type: String,
-      default: 'default-post.jpg',
+      default: null,
     },
     slug: {
       type: String,
-      required: true,
       unique: true,
+      required: true,
     },
     excerpt: {
       type: String,
@@ -71,12 +71,12 @@ PostSchema.pre('save', function (next) {
   if (!this.isModified('title')) {
     return next();
   }
-  
+
   this.slug = this.title
     .toLowerCase()
     .replace(/[^\w ]+/g, '')
     .replace(/ +/g, '-');
-    
+
   next();
 });
 
