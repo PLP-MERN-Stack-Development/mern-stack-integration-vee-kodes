@@ -22,7 +22,11 @@ const app = express();
 
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: ["http://localhost:5173", "https://devdiaryblog.netlify.app/"],
+  credentials: true,
+})
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
