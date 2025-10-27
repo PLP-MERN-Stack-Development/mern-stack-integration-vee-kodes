@@ -23,10 +23,11 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: ["http://localhost:5173", "https://devdiaryblog.netlify.app/"],
-  credentials: true,
-})
-);
+  origin: process.env.ALLOWED_ORIGIN.split(","),
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
