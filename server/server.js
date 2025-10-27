@@ -22,19 +22,10 @@ const app = express();
 
 
 // Middleware
-const allowedOrigins = process.env.ALLOWED_ORIGINS.split(",").map(o => o.trim());
 app.use(cors({
-  origin: function (origin, callback) {
-    if (!origin) return callback(null, true);
-    if (allowedOrigins.includes(origin)) {
-      return callback(null, true);
-    } else {
-      console.log("❌ Blocked by CORS:", origin);
-      return callback(new Error("Not allowed by CORS"), false);
-    }
-  },
+  origin: process.env.ALLOWED_ORIGIN,
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  credentials: true,
+  credentials: true
 }));
 
 app.use(express.json());
